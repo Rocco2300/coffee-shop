@@ -196,8 +196,25 @@ section {
     color: var(--main-color);
 }
 
+.header .cart-items-container .divider {
+    position: fixed;
+    bottom: 100px;
+    height: 1px;
+    width: 90%;
+    background-color: var(--bg);
+    float: left;
+}
+
+.header .cart-items-container .total {
+    position: fixed;
+    bottom: 70px;
+    font-size: 2rem;
+}
+
 .header .cart-items-container .btn {
-    width: 100%;
+    position: fixed;
+    bottom: 20px;
+    width: 90%;
     text-align: center;
 }
 
@@ -336,7 +353,7 @@ section {
 }
 
 .customers .box-container .box {
-    background-color: var(--bg);
+    background-color: var(--black);
     border: var(--border);
     text-align: center;
     padding: 3rem 2rem;
@@ -372,7 +389,7 @@ section {
 }
 
 .footer {
-    background: var(--black);
+    background: var(--bg);
     text-align: center;
 }
 
