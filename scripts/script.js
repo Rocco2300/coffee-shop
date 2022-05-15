@@ -1,9 +1,6 @@
 
 ready = () => {
-    var navbar = document.querySelector('.navbar');
-    var searchForm = document.querySelector('.search-form');
-    var cartItem = document.querySelector('.cart-items-container');
-    
+    document.getElementsByClassName("checkout-btn").addEventListener('click', checkout);
     document.getElementById("search-btn").addEventListener('click', searchClick);
     document.getElementById("cart-btn").addEventListener('click', cartClick);
 
@@ -20,6 +17,8 @@ ready = () => {
         var button = removeButtons[i];
         button.addEventListener('click', removeCartItem);
     }
+
+    var
 }
 
 if (document.readyState == 'loading') {
@@ -52,10 +51,39 @@ window.onscroll = () => {
 
 addCartItem = (e) => {
     var clickedButton = e.target;
-    var item = clickedButton.parentElement;
+    var item = clickedButton.parentElement.parentElement;
     var title = item.getElementsByClassName("title")[0].innerText;
-    console.log(title);
+    var price = item.getElementsByClassName("price")[0].innerText.replace('$', '');
+    var imgSrc = item.getElementsByClassName("image-src")[0].src;
+    addToCart(title, price, imgSrc);
     updateCartTotal();
+}
+
+addToCart = (title, price, imgSrc) => {
+    var cartItem = document.createElement('div');
+    cartItem.classList.add("cart-item");
+    var cartItems = document.getElementsByClassName("cart-content")[0];
+    var cartItemNames = cartItems.getElementsByClassName("title");
+
+    for (let i = 0; i < cartItemNames.length; i++)
+    {
+
+        if (cartItemNames[i].innerText == title)
+            return;
+    }
+
+    var cartItemContent = `
+        <span class = "fas fa-times remove-btn"></span>
+        <img src = ${imgSrc}>
+        <div class = "content">
+            <h3 class = "title">${title}</h3>
+            <div class = "price">$${price}</div>
+        </div>
+    `;
+
+    cartItem.innerHTML = cartItemContent;
+    cartItems.append(cartItem);
+    cartItem.getElementsByClassName("remove-btn")[0].addEventListener('click', removeCartItem);
 }
 
 removeCartItem = (e) => {
@@ -79,5 +107,6 @@ updateCartTotal = () => {
         total += price;
     }
 
+    total = Math.round(total * 100) / 100;
     document.getElementsByClassName('total')[0].innerText = 'Total: $' + total;
 }
