@@ -1,6 +1,6 @@
 
 ready = () => {
-    document.getElementsByClassName("checkout-btn").addEventListener('click', checkout);
+    document.getElementsByClassName("checkout-btn")[0].addEventListener('click', checkout);
     document.getElementById("search-btn").addEventListener('click', searchClick);
     document.getElementById("cart-btn").addEventListener('click', cartClick);
 
@@ -17,8 +17,6 @@ ready = () => {
         var button = removeButtons[i];
         button.addEventListener('click', removeCartItem);
     }
-
-    var
 }
 
 if (document.readyState == 'loading') {
@@ -89,6 +87,17 @@ addToCart = (title, price, imgSrc) => {
 removeCartItem = (e) => {
     var clickedButton = e.target;
     clickedButton.parentElement.remove();
+    updateCartTotal();
+}
+
+checkout = () => {
+    alert("Thank you for the purchase");
+    var cartItems = document.getElementsByClassName("cart-content")[0];
+
+    while (cartItems.hasChildNodes()) {
+        cartItems.removeChild(cartItems.firstChild);
+    }
+
     updateCartTotal();
 }
 
